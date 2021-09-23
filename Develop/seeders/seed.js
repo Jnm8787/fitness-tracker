@@ -1,17 +1,22 @@
 let mongoose = require("mongoose");
 let db = require("../models");
 
-mongoose.connect("mongodb://localhost/workout", {
-  useNewUrlParser: true,
-  useFindAndModify: false
-});
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost/fitness-tracker',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  }
+);
 
 let workoutSeed = [
   {
     day: new Date().setDate(new Date().getDate()-10),
     exercises: [
       {
-        type: "upper body",
+        type: "resistance",
         name: "Bicep Curl",
         duration: 20,
         weight: 55,
@@ -24,7 +29,7 @@ let workoutSeed = [
     day: new Date().setDate(new Date().getDate()-9),
     exercises: [
       {
-        type: "upper body",
+        type: "resistance",
         name: "tricep curl",
         duration: 20,
         weight: 65,
@@ -37,7 +42,7 @@ let workoutSeed = [
     day: new Date().setDate(new Date().getDate()-8),
     exercises: [
       {
-        type: "upper body",
+        type: "resistance",
         name: "shoulders",
         duration: 25,
         weight: 125,
@@ -61,7 +66,7 @@ let workoutSeed = [
     day: new Date().setDate(new Date().getDate()-6),
     exercises: [
       {
-        type: "upper body",
+        type: "resistance",
         name: "Bench Press",
         duration: 20,
         weight: 275,
@@ -75,7 +80,7 @@ let workoutSeed = [
     day: new Date(new Date().setDate(new Date().getDate() - 2)),
     exercises: [
       {
-        type: "lower body",
+        type: "resistance",
         name: "dead lift",
         duration: 20,
         weight: 2750,
