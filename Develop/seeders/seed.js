@@ -1,0 +1,98 @@
+let mongoose = require("mongoose");
+let db = require("../models");
+
+mongoose.connect("mongodb://localhost/workout", {
+  useNewUrlParser: true,
+  useFindAndModify: false
+});
+
+let workoutSeed = [
+  {
+    day: new Date().setDate(new Date().getDate()-10),
+    exercises: [
+      {
+        type: "upper body",
+        name: "Bicep Curl",
+        duration: 20,
+        weight: 55,
+        reps: 10,
+        sets: 3
+      }
+    ]
+  },
+  {
+    day: new Date().setDate(new Date().getDate()-9),
+    exercises: [
+      {
+        type: "upper body",
+        name: "tricep curl",
+        duration: 20,
+        weight: 65,
+        reps: 10,
+        sets: 3
+      }
+    ]
+  },
+  {
+    day: new Date().setDate(new Date().getDate()-8),
+    exercises: [
+      {
+        type: "upper body",
+        name: "shoulders",
+        duration: 25,
+        weight: 125,
+        reps: 10,
+        sets: 3
+      }
+    ]
+  },
+  {
+    day: new Date().setDate(new Date().getDate()-7),
+    exercises: [
+      {
+        type: "cardio",
+        name: "Running",
+        duration: 25,
+        distance: 3,
+      }
+    ]
+  },
+  {
+    day: new Date().setDate(new Date().getDate()-6),
+    exercises: [
+      {
+        type: "upper body",
+        name: "Bench Press",
+        duration: 20,
+        weight: 275,
+        reps: 10,
+        sets: 3
+      }
+    ]
+  },
+  
+  {
+    day: new Date(new Date().setDate(new Date().getDate() - 2)),
+    exercises: [
+      {
+        type: "lower body",
+        name: "dead lift",
+        duration: 20,
+        weight: 2750,
+        reps: 10,
+        sets: 3
+      }
+    ]
+  }
+];
+
+db.Workout.deleteMany({})
+  .then(() => db.Workout.collection.insertMany(workoutSeed))
+  .then(data => {
+    console.log(data.result.n + " records inserted!");
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
