@@ -14,14 +14,16 @@ app.use(logger("dev"));
 app.use(express.static("public"));
 
 //mongo db
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workoutdb", 
+mongoose.connect(
+  "mongodb+srv://Jnm8787:Argentina@cluster0.gannl.mongodb.net/workoutdb?retryWrites=true&w=majority",
 { 
   //for heroku
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
   useFindAndModify: false
- });
+ }
+ );
 
 //routes
 app.use(require("./routes/apiRoutes.js"));
